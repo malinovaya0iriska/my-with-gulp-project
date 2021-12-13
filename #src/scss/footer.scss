@@ -1,0 +1,122 @@
+footer {
+  background: #080A0B;
+
+  .footer_container {
+    flex-direction: column;
+    flex-wrap: wrap;
+    min-height: 233px;
+
+    .footer_nav {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      flex-wrap: wrap;
+      @media screen and (min-width: 375px) {
+        justify-content: center;
+      }
+
+      .footer_logo {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 30px;
+      }
+
+      .footer_list {
+        display: flex;
+        flex-direction: row;
+
+        li {
+          margin-left: 50px;
+
+          a {
+            font-weight: bold;
+            font-size: 12px;
+            line-height: 16px;
+            text-align: right;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+          }
+        }
+      }
+
+      .social-links {
+        display: flex;
+        flex-direction: row;
+
+        li {
+          margin-left: 55px;
+
+          a svg:hover {
+            fill: #FF1313;
+          }
+        }
+      }
+    }
+
+    .footer_service {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+
+      @media screen and (max-width: 375px) {
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      p {
+        font-size: 14px;
+        line-height: 19px;
+        letter-spacing: .1em;
+        mix-blend-mode: normal;
+        opacity: 0.5;
+        @media screen and (max-width: 375px) {
+          padding-top: 20px;
+          font-size: 16px;
+          letter-spacing: .2em;
+        }
+      }
+
+      ul {
+        display: flex;
+        flex-direction: row;
+        @media screen and (max-width: 375px) {
+          flex-direction: column;
+        }
+
+        li {
+          position: relative;
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 16px;
+          text-align: right;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          padding: 22px 7px 0 7px;
+
+          :before {
+            content: "";
+            position: absolute;
+            background: #ffffff;
+            top: 22px;
+            right: 0;
+            bottom: 0;
+            height: 12px;
+            width: 1px;
+          }
+
+          &:hover {
+            opacity: 0.5;
+
+            &:last-child:before {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -20,7 +20,7 @@ const path = {
     html: [source_folder + "/*.html", "!" + source_folder + "/_*.html"],
     css: source_folder + "/scss/style.scss",
     js: source_folder + "/js/script.js",
-    img: source_folder + "/img/**/*.{jpg,png,svg,gif,ico,webp,jfif}",
+    img: source_folder + "/img/**/*.{jpg,png,svg,gif,ico,webp}",
     fonts: source_folder + "/fonts/*.ttf",
   },
   watch: {
@@ -80,7 +80,7 @@ const ttf2woff = require('gulp-ttf2woff');
 const ttf2woff2 = require('gulp-ttf2woff2');
 const fonter = require('gulp-fonter');
 
-const browserSync = (params) => {
+const browserSync = () => {
   browser_sync.init({
     server: {
       baseDir: "./" + project_folder + "/"
@@ -173,7 +173,7 @@ gulp.task('otf2ttf', () => {
     .pipe(dest(source_folder + './fonts/'))
 })
 
-const fontsStyle = (params) => {
+const fontsStyle = () => {
 
   let file_content = fs.readFileSync(source_folder + '/scss/fonts.scss');
   if (file_content === '') {
@@ -184,7 +184,7 @@ const fontsStyle = (params) => {
         for (let i = 0; i < items.length; i++) {
           let fontname = items[i].split('.');
           fontname = fontname[0];
-          if (c_fontname != fontname) {
+          if (c_fontname !== fontname) {
             fs.appendFile(source_folder + '/scss/fonts.scss', '@include font("' + fontname + '", "' + fontname + '", "400", "normal");\r\n', cb);
           }
           c_fontname = fontname;
