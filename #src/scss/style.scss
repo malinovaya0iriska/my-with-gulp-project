@@ -1,0 +1,39 @@
+@mixin font($font_name, $file_name, $weight, $style) {
+
+  @font-face {
+    font-family: $font_name;
+    font-display: swap;
+    src: url("../fonts/#{$file_name}.woff") format("woff"), url("../fonts/#{$file_name}.woff2") format("woff2");
+    font-weight: #{$weight};
+    font-style: #{$style};
+  }
+}
+
+@import 'fonts';
+
+* {
+  font-family: BebasNeuBold sans-serif;
+  font-size: 30px;
+  color: red;
+  text-decoration: underline;
+}
+
+body {
+  display: flex;
+}
+
+div {
+  display: flex;
+  color: blue;
+  background-image: url('../img/test-img.jpg');
+  @media (max-width: 767px) {
+    font-size: 24px;
+  }
+}
+
+span {
+  font-size: 20px;
+  @media (max-width: 767px) {
+    font-size: 16px;
+  }
+}
