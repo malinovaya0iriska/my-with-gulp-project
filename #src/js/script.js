@@ -1,21 +1,18 @@
-@@include('alert.js');
-
-
 //implement adding class webp to classes
-function testWebP(callback) {
+const testWebP = (callback) => {
 
-  var webP = new Image();
-  webP.onload = webP.onerror = function () {
-    callback(webP.height == 2);
+  const webP = new Image();
+  webP.onload = webP.onerror = () => {
+    callback(webP.height === 2);
   };
   webP.src = "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA";
-}
+};
 
-testWebP(function (support) {
-
-  if (support == true) {
-    document.querySelector('body').classList.add('webp');
-  } else {
-    document.querySelector('body').classList.add('no-webp');
+testWebP((support) => {
+  if (support) {
+    return document.querySelector('body').classList.add('webp');
   }
+
+  return document.querySelector('body').classList.add('no-webp');
+
 });

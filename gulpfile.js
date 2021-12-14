@@ -1,107 +1,68 @@
-//create variables for directories' names
+const PROJECT_FOLDER = require('path').basename(__dirname);
+const SOURCE_FOLDER = "#src";
 
-//const project_folder = "dist";
+const {src, dest, series, parallel, watch} = require('gulp');
 
-const project_folder = require('path').basename(__dirname);
-const source_folder = "#src";
-
-const fs = require('fs')
-//create object with paths for dist,
-// src files for watching changes
-const path = {
-  build: {
-    html: project_folder + "/",
-    css: project_folder + "/css/",
-    js: project_folder + "/js/",
-    img: project_folder + "/img/",
-    fonts: project_folder + "/fonts/",
-  },
-  src: {
-    html: [source_folder + "/*.html", "!" + source_folder + "/_*.html"],
-    css: source_folder + "/scss/style.scss",
-    js: source_folder + "/js/script.js",
-    img: source_folder + "/img/**/*.{jpg,png,svg,gif,ico,webp}",
-    fonts: source_folder + "/fonts/*.ttf",
-  },
-  watch: {
-    html: source_folder + "/**/*.html",
-    css: source_folder + "/scss/**/*.scss",
-    js: source_folder + "/js/**/*.js",
-    img: source_folder + "/img/**/*.{jpg,png,svg,gif,ico,webp}",
-  },
-  clean: "./" + project_folder + "/",
-};
-
-const {src, dest} = require('gulp');
-const gulp = require('gulp');
-
-//plugin browser-sync for updating browser
-const browser_sync = require('browser-sync').create();
-
-//add files into root file
+const browserSync = require('browser-sync').create();
 const file_include = require('gulp-file-include');
-
-//clean directory dist before every build
 const del = require('del');
-
-//add styles
 const scss = require('gulp-sass')(require('sass'));
-
-//add prefixes to css properties
 const autoprefixer = require('gulp-autoprefixer');
-
-//collect all media queries together in the end of file
 const group_media = require('gulp-group-css-media-queries');
-
-//clean minimize CSS
 const cleanCSS = require('gulp-clean-css');
-
-//creation additional optimized files
 const rename = require("gulp-rename");
-
-//reduce size .js
 const uglify = require('gulp-uglify-es').default;
-
-//reduce size images
 const imagemin = require('gulp-imagemin');
-
-//convert to webP
 const webp = require('gulp-webp');
-
-//replace img to picture tag
 const webpHTML = require('gulp-webp-html');
-
-//replace img to picture tag
 const webpcss = require("gulp-webpcss");
-
-//FONTS
-//convert into different extensions
 const ttf2woff = require('gulp-ttf2woff');
 const ttf2woff2 = require('gulp-ttf2woff2');
 const fonter = require('gulp-fonter');
 
-const browserSync = () => {
-  browser_sync.init({
+
+const path = {
+  build: {
+    html: `${PROJECT_FOLDER}/`,
+    css: `${PROJECT_FOLDER}/css/`,
+    js: `${PROJECT_FOLDER}/js/`,
+    img: `${PROJECT_FOLDER}/img/`,
+    fonts: `${PROJECT_FOLDER}/fonts/`,
+  },
+  src: {
+    html: [`${SOURCE_FOLDER}/*.html`, `!${SOURCE_FOLDER}/_*.html`],
+    css: `${SOURCE_FOLDER}/scss/style.scss`,
+    js: `${SOURCE_FOLDER}/js/script.js`,
+    img: `${SOURCE_FOLDER}/img/**/*.{jpg,png,svg,gif,ico,webp}`,
+    fonts: `${SOURCE_FOLDER}/fonts/*.ttf`,
+  },
+  watch: {
+    html: `${SOURCE_FOLDER}/**/*.html`,
+    css: `${SOURCE_FOLDER}/scss/**/*.scss`,
+    js: `${SOURCE_FOLDER}/js/**/*.js`,
+    img: `${SOURCE_FOLDER}/img/**/*.{jpg,png,svg,gif,ico,webp}`,
+  },
+  clean: `./${PROJECT_FOLDER}/`,
+};
+
+const browserSyncSet = () => {
+  browserSync.init({
     server: {
-      baseDir: "./" + project_folder + "/"
+      baseDir: "./" + PROJECT_FOLDER + "/"
     },
-    //port for  project running
     port: 3000,
-    //notifications are off
     notify: false,
   })
 };
 
-//html processing
 const html = () => {
   return src(path.src.html)
     .pipe(file_include())
     .pipe(webpHTML())
     .pipe(dest(path.build.html))
-    .pipe(browser_sync.stream())
+    .pipe(browserSync.stream())
 }
 
-//scss processing
 const css = () => {
   return src(path.src.css)
     .pipe(scss({outputStyle: 'expanded'}))
@@ -117,10 +78,9 @@ const css = () => {
       extname: '.min.css'
     }))
     .pipe(dest(path.build.css))
-    .pipe(browser_sync.stream())
+    .pipe(browserSync.stream())
 }
 
-//js processing
 const js = () => {
   return src(path.src.js)
     .pipe(file_include())
@@ -130,10 +90,9 @@ const js = () => {
       extname: '.min.js'
     }))
     .pipe(dest(path.build.js))
-    .pipe(browser_sync.stream())
+    .pipe(browserSync.stream())
 }
 
-//IMG processing
 const images = () => {
   return src(path.src.img)
     .pipe(webp({
@@ -152,10 +111,9 @@ const images = () => {
         ]
       })]))
     .pipe(dest(path.build.img))
-    .pipe(browser_sync.stream())
+    .pipe(browserSync.stream())
 }
 
-//fonts processing
 const fonts = () => {
   src(path.src.fonts)
     .pipe(ttf2woff())
@@ -165,61 +123,49 @@ const fonts = () => {
     .pipe(dest(path.build.fonts))
 }
 
-gulp.task('otf2ttf', () => {
-  return src([source_folder + './fonts/*.otf'])
+const otf2ttf = () => {
+  return src([SOURCE_FOLDER + './fonts/!*.otf'])
     .pipe(fonter({
       formats: ['ttf']
     }))
-    .pipe(dest(source_folder + './fonts/'))
-})
-
-const fontsStyle = () => {
-
-  let file_content = fs.readFileSync(source_folder + '/scss/fonts.scss');
-  if (file_content === '') {
-    fs.writeFile(source_folder + '/scss/fonts.scss', '', cb);
-    return fs.readdir(path.build.fonts, function (err, items) {
-      if (items) {
-        let c_fontname;
-        for (let i = 0; i < items.length; i++) {
-          let fontname = items[i].split('.');
-          fontname = fontname[0];
-          if (c_fontname !== fontname) {
-            fs.appendFile(source_folder + '/scss/fonts.scss', '@include font("' + fontname + '", "' + fontname + '", "400", "normal");\r\n', cb);
-          }
-          c_fontname = fontname;
-        }
-      }
-    })
-  }
-}
-
-const cb = () => {
+    .pipe(dest(SOURCE_FOLDER + './fonts/'))
 }
 
 const watchFiles = () => {
-  gulp.watch([path.watch.html], html)
-  gulp.watch([path.watch.css], css)
-  gulp.watch([path.watch.js], js)
-  gulp.watch([path.watch.img], images)
+  watch([path.watch.html], html)
+  watch([path.watch.css], css)
+  watch([path.watch.js], js)
+  watch([path.watch.img], images)
 }
 
 const clean = () => {
   return del(path.clean)
 }
 
-//build production vers
-let build = gulp.series(clean, gulp.parallel(css, html, js, images, fonts), fontsStyle);
+const build = series(clean, parallel(html, css, js, images, fonts), otf2ttf);
 
-//watching file's changes and reload browser
-let watch = gulp.parallel(build, watchFiles, browserSync);
+const watchProcess = parallel(build, watchFiles, browserSyncSet);
 
-exports.fontsStyle = fontsStyle;
+
+exports.otf2ttf = otf2ttf;
 exports.fonts = fonts;
 exports.images = images;
 exports.js = js;
 exports.css = css;
 exports.html = html;
 exports.build = build;
-exports.watch = watch;
-exports.default = watch;
+exports.watchProcess = watchProcess;
+exports.default = watchProcess;
+
+/*export () => {
+  changeFontFormat,
+        fonts,
+    images,
+    js,
+    css,
+    html,
+    build,
+    watchProcess,
+default:
+  watchProcess
+}*/
