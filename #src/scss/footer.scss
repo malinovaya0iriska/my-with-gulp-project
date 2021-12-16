@@ -2,6 +2,9 @@ footer {
   background: #080A0B;
   max-height: 233px;
   height: 100%;
+  @media screen and (max-width: 350px) {
+    max-height: 490px;
+  }
 
   .footer_container {
     flex-direction: column;
@@ -13,28 +16,45 @@ footer {
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      flex-wrap: wrap;
       @media screen and (max-width: 350px) {
         justify-content: center;
+        align-content: space-between;
+        padding: 26px 0;
+        max-height: 300px;
+        height: 100%
       }
 
       .footer_logo {
         width: 90px;
         height: 90px;
         margin-bottom: 30px;
+        @media screen and (max-width: 350px) {
+          margin-bottom: 0;
+        }
       }
 
-      .footer_list {
-        display: flex;
-        justify-content: space-between;
+      nav {
         width: 100%;
-        min-width: 615px;
+        max-width: 615px;
+        @media screen and (max-width: 350px) {
+          height: 63px;
+        }
 
-        li a {
-          font-weight: bold;
-          font-size: 12px;
-          line-height: 16px;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
+        .footer_list {
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+
+          li a {
+            font-weight: bold;
+            font-size: 12px;
+            line-height: 16px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+          }
         }
       }
 
@@ -44,10 +64,8 @@ footer {
         width: 100%;
         max-width: 240px;
 
-        li {
-          a svg:hover {
-            fill: #FF1313;
-          }
+        li a svg:hover {
+          fill: #FF1313;
         }
       }
     }
@@ -60,21 +78,19 @@ footer {
       height: 100%;
 
       @media screen and (max-width: 375px) {
-        justify-content: center;
         flex-direction: column;
+        justify-content: flex-start;
       }
 
       p {
         display: block;
         font-size: 14px;
         line-height: 19px;
-        letter-spacing: .1em;
         mix-blend-mode: normal;
         opacity: 0.5;
         @media screen and (max-width: 375px) {
-          padding-top: 20px;
-          font-size: 16px;
-          letter-spacing: .2em;
+          padding: 20px 0 32px 0;
+          font-size: 12px;
         }
       }
 
@@ -83,6 +99,10 @@ footer {
         flex-direction: row;
         @media screen and (max-width: 375px) {
           flex-direction: column;
+          max-height: 72px;
+          height: 100%;
+          align-items: center;
+          justify-content: space-between;
         }
 
         li {
@@ -95,22 +115,21 @@ footer {
           text-transform: uppercase;
           padding: 0 7px;
 
-          /*::after {
+          &:hover {
+            opacity: 0.5;
+          }
+
+          ::after {
             content: "";
             position: absolute;
             background: #ffffff;
-            top: 22px;
+            top: 0;
             right: 0;
             bottom: 0;
-            height: 12px;
+            height: 16px;
             width: 1px;
-          }
-*/
-          &:hover {
-            opacity: 0.5;
-
-            &:last-child::before {
-              display: none;
+            @media screen and (max-width: 375px) {
+              display: none
             }
           }
         }
@@ -118,3 +137,4 @@ footer {
     }
   }
 }
+
