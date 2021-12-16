@@ -142,30 +142,20 @@ const clean = () => {
   return del(path.clean)
 }
 
-const build = series(clean, parallel(html, css, js, images, fonts), otf2ttf);
+const build = series(clean, parallel(html, css, js, images, fonts, otf2ttf));
 
-const watchProcess = parallel(build, watchFiles, browserSyncSet);
+const watchProcess = parallel(series(build, browserSyncSet), watchFiles);
 
 
-exports.otf2ttf = otf2ttf;
-exports.fonts = fonts;
-exports.images = images;
-exports.js = js;
-exports.css = css;
-exports.html = html;
-exports.build = build;
-exports.watchProcess = watchProcess;
-exports.default = watchProcess;
-
-/*export () => {
-  changeFontFormat,
-        fonts,
-    images,
-    js,
-    css,
-    html,
-    build,
-    watchProcess,
-default:
+module.exports = {
+  otf2ttf,
+  fonts,
+  images,
+  js,
+  css,
+  html,
+  build,
+  watchProcess,
+  default:
   watchProcess
-}*/
+}

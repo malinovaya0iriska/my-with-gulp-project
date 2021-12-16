@@ -55,6 +55,9 @@ button {
   max-height: 900px;
   margin: 0 auto;
   padding: 0 120px;
+  @media (max-width: 350px){
+    padding: 0 15px;
+  }
 }
 
 .title {

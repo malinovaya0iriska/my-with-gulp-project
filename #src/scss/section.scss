@@ -2,40 +2,46 @@
 
 .subscription {
   height: 100%;
+  padding-left: 40px;
+  padding-top: 50px;
+
+  @media (max-width: 350px) {
+    padding-top: 40px;
+    padding-left: 0;
+  }
 
   .subscription_container {
+    justify-content: end;
     height: 100%;
-    justify-content: space-between;
+    background: url("../img/bg-6.jpg") top left no-repeat;
 
-    .subscription_img {
-      margin-top: 50px;
-      background-image: url("../img/bg-6.jpg");
-      width: 450px;
-      height: 696px;
-      @media (max-width: 350px) {
-        background: url("../img/bg-6-mobile.jpg") no-repeat center;
-        width: 450px;
-        height: 360px;
-      }
+    @media (max-width: 350px) {
+      background: url("../img/bg-6-mobile.jpg") top left no-repeat;
     }
 
     .subscription_content {
-      padding-top: 220px;
+      padding-top: 170px;
       display: flex;
       flex-direction: column;
-      max-width: 654px;
+      max-width: 652px;
       margin-bottom: 150px;
+
       @media (max-width: 350px) {
-        padding-top: 30px;
-        max-width: 190px;
+        padding-top: 24px;
+        max-width: 177px;
+        margin-bottom: 60px;
       }
 
       p {
         display: block;
         font-size: 18px;
         line-height: 1.22;
-        text-align: justify;
         margin: 40px 0;
+        @media (max-width: 350px) {
+          font-size: 14px;
+          line-height: 1.36;
+          margin: 20px 0;
+        }
       }
 
       form {
@@ -44,6 +50,9 @@
         display: flex;
         justify-content: space-between;
         @media (max-width: 350px) {
+          padding-top: 0;
+          min-width: 300px;
+          align-self: end;
           flex-direction: column;
           flex-wrap: wrap;
         }
@@ -52,6 +61,7 @@
           position: relative;
 
           input {
+            display: block;
             width: 368px;
             padding: 28px 22px 12px 22px;
             font-size: 18px;
@@ -69,6 +79,11 @@
               outline: 0;
               opacity: .5;
             }
+
+            @media (max-width: 350px) {
+              width: 100%;
+              margin-bottom: 20px;
+            }
           }
 
           label {
@@ -85,6 +100,7 @@
         }
 
         .btn-form {
+          max-width: 100%;
           padding: 20px 72px;
         }
       }

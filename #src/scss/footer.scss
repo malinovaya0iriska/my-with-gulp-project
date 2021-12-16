@@ -4,7 +4,7 @@ footer {
   .footer_container {
     flex-direction: column;
     flex-wrap: wrap;
-    min-height: 233px;
+    max-height: 233px;
 
     .footer_nav {
       display: flex;
@@ -97,7 +97,7 @@ footer {
           text-transform: uppercase;
           padding: 22px 7px 0 7px;
 
-          :before {
+          ::before {
             content: "";
             position: absolute;
             background: #ffffff;
@@ -111,7 +111,7 @@ footer {
           &:hover {
             opacity: 0.5;
 
-            &:last-child:before {
+            &:last-child::before {
               display: none;
             }
           }
