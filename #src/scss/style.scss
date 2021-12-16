@@ -17,6 +17,7 @@ html {
   box-sizing: border-box;
   scroll-behavior: smooth;
   background: $bgColor;
+  height: 100%;
 }
 
 *, *::before, *::after {
@@ -27,6 +28,7 @@ body {
   font-family: Open Sans, sans-serif;
   font-style: normal;
   color: $textColor;
+  height: 100%;
 }
 
 a {
@@ -34,12 +36,15 @@ a {
   text-decoration: none;
 }
 
-h1, h2, h3, h4, p {
+h1, h2, h3, h4, p, ul {
   margin: 0;
+  padding: 0;
 }
 
 li {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 button {

@@ -1,19 +1,19 @@
 footer {
   background: #080A0B;
+  max-height: 233px;
+  height: 100%;
 
   .footer_container {
     flex-direction: column;
-    flex-wrap: wrap;
-    max-height: 233px;
+    justify-content: space-between;
+    height: 100%;
 
     .footer_nav {
       display: flex;
-      flex-direction: row;
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-      flex-wrap: wrap;
-      @media screen and (min-width: 375px) {
+      @media screen and (max-width: 350px) {
         justify-content: center;
       }
 
@@ -25,29 +25,26 @@ footer {
 
       .footer_list {
         display: flex;
-        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        min-width: 615px;
 
-        li {
-          margin-left: 50px;
-
-          a {
-            font-weight: bold;
-            font-size: 12px;
-            line-height: 16px;
-            text-align: right;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-          }
+        li a {
+          font-weight: bold;
+          font-size: 12px;
+          line-height: 16px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
         }
       }
 
       .social-links {
         display: flex;
-        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 240px;
 
         li {
-          margin-left: 55px;
-
           a svg:hover {
             fill: #FF1313;
           }
@@ -57,10 +54,10 @@ footer {
 
     .footer_service {
       display: flex;
-      flex-direction: row;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
+      height: 100%;
 
       @media screen and (max-width: 375px) {
         justify-content: center;
@@ -68,6 +65,7 @@ footer {
       }
 
       p {
+        display: block;
         font-size: 14px;
         line-height: 19px;
         letter-spacing: .1em;
@@ -95,9 +93,9 @@ footer {
           text-align: right;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          padding: 22px 7px 0 7px;
+          padding: 0 7px;
 
-          ::before {
+          /*::after {
             content: "";
             position: absolute;
             background: #ffffff;
@@ -107,7 +105,7 @@ footer {
             height: 12px;
             width: 1px;
           }
-
+*/
           &:hover {
             opacity: 0.5;
 

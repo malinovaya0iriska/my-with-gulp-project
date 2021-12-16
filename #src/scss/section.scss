@@ -1,10 +1,6 @@
 @import 'variables';
 
 .subscription {
-  height: 100%;
-  padding-left: 40px;
-  padding-top: 50px;
-
   @media (max-width: 350px) {
     padding-top: 40px;
     padding-left: 0;
@@ -13,8 +9,11 @@
   .subscription_container {
     justify-content: end;
     height: 100%;
-    background: url("../img/bg-6.jpg") top left no-repeat;
-
+    background-origin: border-box;
+    background-image: url("../img/bg-6.jpg");
+    background-position: top 30px left 160px;
+    background-repeat: no-repeat;
+    background-size: contain;
     @media (max-width: 350px) {
       background: url("../img/bg-6-mobile.jpg") top left no-repeat;
     }
