@@ -54,6 +54,10 @@ footer {
             line-height: 16px;
             letter-spacing: 0.1em;
             text-transform: uppercase;
+
+            &:hover {
+              color: $accentColor;
+            }
           }
         }
       }
