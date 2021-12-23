@@ -1,13 +1,13 @@
 @import 'variables';
 
 .subscription {
-  @media (max-width: 350px) {
+  @media (max-width: $mobile-width) {
     padding-top: 40px;
     padding-left: 0;
   }
 }
 
-.subscription_container {
+.subscription-container {
   justify-content: end;
   height: 100%;
   background-origin: border-box;
@@ -15,94 +15,95 @@
   background-position: top 30px left 160px;
   background-repeat: no-repeat;
   background-size: contain;
-  @media (max-width: 350px) {
+  @media (max-width: $mobile-width) {
     background: url("../img/bg-6-mobile.jpg") top left no-repeat;
   }
 }
 
-.subscription_content {
+.subscription__content {
   padding-top: 170px;
   display: flex;
   flex-direction: column;
   max-width: 652px;
   margin-bottom: 150px;
 
-  @media (max-width: 350px) {
+  @media (max-width: $mobile-width) {
     padding-top: 24px;
     max-width: 177px;
     margin-bottom: 60px;
   }
+}
 
-  p {
-    display: block;
-    font-size: 18px;
-    line-height: 1.22;
-    margin: 40px 0;
-    @media (max-width: 350px) {
-      font-size: 14px;
-      line-height: 1.36;
-      margin: 20px 0;
-    }
+.subscription__content-text {
+  display: block;
+  font-size: 18px;
+  line-height: 1.22;
+  margin: 40px 0;
+  @media (max-width: $mobile-width) {
+    font-size: 14px;
+    line-height: 1.36;
+    margin: 20px 0;
+  }
+}
+
+.subscription__content__form {
+  padding-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 350px) {
+    padding-top: 0;
+    min-width: 300px;
+    align-self: end;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+}
+
+.subscription__content__input-field {
+  position: relative;
+}
+
+.input-field__input {
+  display: block;
+  width: 368px;
+  padding: 28px 22px 12px 22px;
+  font-size: 18px;
+  line-height: 1.4;
+  color: $accentColor;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+
+  &:focus + .input-field__label,
+  &:valid + .input-field__label {
+    transform: translateY(-20px);
+    font-size: 14px;
+    outline: 0;
+    opacity: .5;
   }
 
-  form {
-    padding-top: 20px;
+  @media (max-width: $mobile-width) {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    @media (max-width: 350px) {
-      padding-top: 0;
-      min-width: 300px;
-      align-self: end;
-      flex-direction: column;
-      flex-wrap: wrap;
-    }
+    margin-bottom: 20px;
   }
+}
 
-  .input_field {
-    position: relative;
+.input-field__label {
+  position: absolute;
+  top: 15px;
+  left: 18px;
+  padding: 10px 0;
+  font-size: 18px;
+  line-height: 1.4;
+  color: $textColor;
+  pointer-events: none;
+  transition: .5s;
+}
 
-    input {
-      display: block;
-      width: 368px;
-      padding: 28px 22px 12px 22px;
-      font-size: 18px;
-      line-height: 1.4;
-      color: $accentColor;
-      border: none;
-      border-radius: 4px;
-      outline: none;
-      background: rgba(255, 255, 255, 0.08);
-
-      &:focus + label,
-      &:valid + label {
-        transform: translateY(-20px);
-        font-size: 14px;
-        outline: 0;
-        opacity: .5;
-      }
-
-      @media (max-width: 350px) {
-        width: 100%;
-        margin-bottom: 20px;
-      }
-    }
-
-    label {
-      position: absolute;
-      top: 18px;
-      left: 18px;
-      padding: 10px 0;
-      font-size: 18px;
-      line-height: 1.35;
-      color: $textColor;
-      pointer-events: none;
-      transition: .5s;
-    }
-  }
-
-  .btn-form {
-    max-width: 100%;
-    padding: 20px 72px;
-  }
+.input-field__btn {
+  max-width: 100%;
+  padding: 20px 72px;
 }
