@@ -96,7 +96,7 @@ const js = () => {
 const images = () => {
   return src(path.src.img)
     .pipe(webp({
-      quaality: 70
+      quality: 70
     }))
     .pipe(dest(path.build.img))
     .pipe(src(path.src.img))
